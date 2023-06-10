@@ -8,42 +8,52 @@ export interface NodeType {
   prev?: NodeType;
 }
 
+export interface OptionsType {
+  attributes?: ("h1" | "h2" | "h3" | "h4" | "h5")[];
+  containerClassName?: string;
+  ordered?: boolean;
+  appendTo?: string;
+  contentSelector?: string;
+}
+
 export default class TableOfContents {
   content: HTMLElement | null;
-  attributes: string;
-  ulClassName: string;
   nodeList: NodeType[] | undefined;
   nodeObject: NodeType | null;
   markup: HTMLElement | null;
+  options?: OptionsType;
+  settings: OptionsType;
 
-  constructor({
-    el,
-    attributes = ["h1", "h2", "h3", "h4"],
-    ulClassName = "appendix"
-  }: {
-    el: HTMLElement | null;
-    attributes?: string[];
-    ulClassName?: string;
-  }) {
-    this.content = el;
-    this.attributes = attributes.join(",");
+  constructor(options?: OptionsType) {
+    const defaultOptions: OptionsType = {
+      attributes: ["h1", "h2", "h3"],
+      appendTo: "body",
+      containerClassName: "toc",
+      ordered: false,
+      contentSelector: "#content"
+    };
+    this.settings = { ...defaultOptions, ...options };
     this.nodeList = [];
-    this.ulClassName = ulClassName;
     this.nodeObject = null;
     this.markup = null;
+    this.options = options;
+    this.content = document.querySelector(
+      this.settings.contentSelector as string
+    );
   }
 
-  init = (): void => {
+  public init = (): void => {
     this.findAllHeaders();
     this.createHierarchy();
     const markup = this.generateMarkup(this.nodeObject);
     if (markup) {
-      document.body.append(markup);
+      document.querySelector(this.settings.appendTo as string)?.append(markup);
     }
   };
 
-  findAllHeaders = (): void => {
-    const nodeList = this.content?.querySelectorAll(this.attributes);
+  private findAllHeaders = (): void => {
+    const query = this.settings.attributes?.join(",") as string;
+    const nodeList = query ? this.content?.querySelectorAll(query) : undefined;
     if (nodeList) {
       const nodeArray: NodeType[] = Array.from(nodeList).map((el) => {
         const attribute = el.tagName.toLowerCase();
@@ -61,7 +71,7 @@ export default class TableOfContents {
     }
   };
 
-  createHierarchy = (): void => {
+  private createHierarchy = (): void => {
     if (this.nodeList?.length) {
       const rootNode: NodeType = {
         el: null,
@@ -101,13 +111,17 @@ export default class TableOfContents {
     }
   };
 
-  generateMarkup = (node: NodeType | null): HTMLElement | null => {
+  private generateMarkup = (node: NodeType | null): HTMLElement | null => {
     if (node === null) {
       return null;
     }
     let parent: HTMLElement = document.createElement("li");
     if (node.level === 0) {
       parent = document.createElement("div");
+      const className = this.settings.containerClassName;
+      if (className) {
+        parent.classList.add(className);
+      }
     } else {
       const a = document.createElement("a");
       a.append(node.content);
@@ -115,14 +129,14 @@ export default class TableOfContents {
       parent.append(a);
     }
     if (node.children.length > 0) {
-      const ul = document.createElement("ul");
+      const list = document.createElement(this.settings.ordered ? "ol" : "ul");
       for (let n of node.children) {
         const ull = this.generateMarkup(n);
         if (ull) {
-          ul.append(ull);
+          list.append(ull);
         }
       }
-      parent.append(ul);
+      parent.append(list);
     }
     return parent;
   };
