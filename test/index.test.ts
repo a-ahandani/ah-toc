@@ -1,7 +1,7 @@
-import TableOfContent from '../src';
+import TableOfContents from '../src';
 
 
-describe('TableOfContent', () => {
+describe('TableOfContents', () => {
   beforeEach(() => {
     // Create a sample HTML structure for testing
     document.body.innerHTML = `
@@ -16,7 +16,7 @@ describe('TableOfContent', () => {
 
   test('init() should generate the correct table of contents', () => {
 
-    const toc = new TableOfContent();
+    const toc = new TableOfContents();
     toc.init();
 
     const generatedMarkup = document.body.innerHTML;

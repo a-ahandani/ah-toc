@@ -30,7 +30,7 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "ts-toc",
+  "name": "table-of-contents-generator",
   "author": "Ahmad Ahandani",
   "module": "dist/table-of-contents.esm.js",
   "size-limit": [
