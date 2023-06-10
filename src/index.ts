@@ -1,4 +1,3 @@
-
 export interface NodeType {
   el: Element | null;
   id: string | null;
