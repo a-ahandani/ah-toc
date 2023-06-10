@@ -128,8 +128,3 @@ export default class TableOfContents {
     return parent;
   };
 }
-
-
-const myDocument = document.getElementById("app");
-const index = new TableOfContents({ el: myDocument });
-index.init();
