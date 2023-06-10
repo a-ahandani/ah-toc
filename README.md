@@ -1,88 +1,57 @@
-# TableOfContents
+# Table of Contents Generator
 
-`TableOfContents` is a JavaScript library that generates a table of contents based on the headings in a given HTML element. It allows you to easily create a hierarchical structure of the document's headings and provides an automatically generated table of contents for navigation.
+The Table of Contents Generator is a JavaScript library that generates a table of contents based on the headings (e.g., `<h1>`, `<h2>`, `<h3>`) within an HTML document. It provides options for customizing the generated table of contents.
 
 ## Installation
 
-You can install `TableOfContents` via npm:
+You can install the Table of Contents Generator library using npm:
 
-```shell
-npm install ts-toc
+```bash
+npm install html-toc-generator
 ```
 
 ## Usage
 
-To use `TableOfContents`, follow these steps:
+To use the Table of Contents Generator in your project, follow these steps:
 
-1. Import the `TableOfContents` class:
+1. Import the library:
 
-   ```javascript
-   import { TableOfContents } from 'ts-toc';
-   ```
-
-2. Create an instance of `TableOfContents` by passing the target element and optional configuration options:
-
-   ```javascript
-   const toc = new TableOfContents({
-     el: document.getElementById('content'), // Target element for generating the table of contents
-     attributes: ['h1', 'h2', 'h3', 'h4'], // Array of heading tags to include in the table of contents
-     ulClassName: 'appendix' // Optional class name for the generated unordered list
-   });
-   ```
-
-3. Call the `init()` method to generate and append the table of contents to the document:
-
-   ```javascript
-   toc.init();
-   ```
-
-4. Customize the table of contents appearance using CSS as desired.
-
-## Example
-
-Here's a basic example of using `TableOfContents`:
-
-```html
-<body>
-  <div id="content">
-    <h1 id="header1">Header 1</h1>
-    <h2 id="header2">Header 2</h2>
-    <h3 id="header3">Header 3</h3>
-    <h2 id="header4">Header 4</h2>
-  </div>
-
-  <script type="module">
-    import { TableOfContents } from 'ts-toc';
-
-    const toc = new TableOfContents({
-      el: document.getElementById('content')
-    });
-
-    toc.init();
-  </script>
-</body>
+```javascript
+import TableOfContents from 'html-toc-generator';
 ```
 
-This will generate a table of contents based on the headings (`h1`, `h2`, `h3`, `h4`) within the `#content` element.
+2. Create an instance of the `TableOfContents` class:
+
+```javascript
+const options = {
+  attributes: ['h1', 'h2', 'h3'],
+  appendTo: 'body',
+  containerClassName: 'toc',
+  ordered: false,
+  contentSelector: '#content'
+};
+
+const tableOfContents = new TableOfContents(options);
+```
+
+3. Call the `init` method to generate the table of contents:
+
+```javascript
+tableOfContents.init();
+```
 
 ## Options
 
-The `TableOfContents` constructor accepts an options object with the following properties:
+The `TableOfContents` class accepts an optional `options` object during initialization. The available options are:
 
-- `el` (required): The target element for generating the table of contents. Must be an HTML element.
-- `attributes` (optional): An array of heading tags to include in the table of contents. Defaults to `['h1', 'h2', 'h3', 'h4']`.
-- `ulClassName` (optional): The class name to be added to the generated unordered list element. Defaults to `'appendix'`.
-
+| Option               | Type       | Default Value        | Optional | Description                                                                                        |
+| -------------------- | ---------- | -------------------- | -------- | -------------------------------------------------------------------------------------------------- |
+| `attributes`         | `string[]` | `['h1', 'h2', 'h3']` | Yes      | An array of HTML heading tag names to include in the table of contents.                            |
+| `appendTo`           | `string`   | `'body'`             | Yes      | The selector of the element to which the table of contents should be appended.                     |
+| `containerClassName` | `string`   | `'toc'`              | Yes      | The CSS class name to be applied to the container element of the table of contents.                |
+| `ordered`            | `boolean`  | `false`              | Yes      | A boolean value indicating whether the generated table of contents should be ordered or unordered. |
+| `contentSelector`    | `string`   | `'#content'`         | Yes      | The selector of the element containing the content to generate the table of contents from.         |
+s
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
-
-
-## Issues
-
-If you encounter any issues or have suggestions, please [open an issue](https://github.com/a-ahandani/ts-toc/issues).
-
-## Credits
-
-`TableOfContents` is developed and maintained by [Ahmad Ahandani](https://github.com/a-ahandani).
-
