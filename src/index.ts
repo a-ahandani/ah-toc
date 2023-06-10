@@ -9,7 +9,7 @@ export interface NodeType {
   prev?: NodeType;
 }
 
-export default class TableOfContent {
+export default class TableOfContents {
   content: HTMLElement | null;
   attributes: string;
   ulClassName: string;
@@ -131,5 +131,5 @@ export default class TableOfContent {
 
 
 const myDocument = document.getElementById("app");
-const index = new TableOfContent({ el: myDocument });
+const index = new TableOfContents({ el: myDocument });
 index.init();
