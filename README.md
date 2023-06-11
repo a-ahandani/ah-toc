@@ -17,6 +17,8 @@ npm install ah-toc
 
 To use the Table of Contents Generator in your project, follow these steps:
 
+### 1- Pure Javascript
+
 1. Import the library:
 
 ```javascript
@@ -43,7 +45,7 @@ const tableOfContents = new TableOfContents(options);
 tableOfContents.init();
 ```
 
-### React Hook
+### 2- React Hook
 
 #### Example
 
