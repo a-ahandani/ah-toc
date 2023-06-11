@@ -1,15 +1,16 @@
 
 import { MutableRefObject, useEffect, useState } from "react";
-import TableOfContents, { NodeType } from "./table-of-contents";
+import TableOfContents, { NodeType, OptionsType } from "./table-of-contents";
 
-const useTableOfContents = ({ contentRef }: { contentRef: MutableRefObject<undefined> }) => {
+const useTableOfContents = ({ contentRef, options }: { contentRef: MutableRefObject<undefined>, options: OptionsType }) => {
     let toc: TableOfContents
     let [node, setNode] = useState<NodeType>()
     useEffect(() => {
         if (!toc) {
             toc = new TableOfContents({
                 contentElement: contentRef.current,
-                returnObject: true
+                returnObject: true,
+                ...options,
             });
             const data = toc.init() as NodeType
             setNode(data)
