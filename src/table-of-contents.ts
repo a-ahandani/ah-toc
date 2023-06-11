@@ -2,7 +2,7 @@ export interface NodeType {
     el: Element | null;
     id: string | null;
     attribute: string;
-    content: string | Node;
+    content: string;
     level: number;
     children: NodeType[];
     prev?: NodeType;
