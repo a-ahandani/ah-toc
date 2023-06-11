@@ -43,6 +43,52 @@ const tableOfContents = new TableOfContents(options);
 tableOfContents.init();
 ```
 
+### React Hook
+
+#### Example
+
+```javascript
+import { useRef } from 'react';
+import useTableOfContents from 'table-of-contents-library/hook';
+
+const MyComponent = () => {
+  const contentRef = useRef();
+  const tocData = useTableOfContents({ contentRef });
+
+  return (
+    <div>
+      {/* Your content goes here */}
+      <div ref={contentRef}>...</div>
+
+      {/* Render the table of contents */}
+      {tocData && (
+        <ul>
+          {tocData.children.map((node) => (
+            <li key={node.id}>
+              <a href={`#${node.id}`}>{node.content}</a>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+};
+```
+
+#### `useTableOfContents` Hook
+
+##### Parameters
+
+- `contentRef`: A `MutableRefObject` containing a reference to the content element in the HTML document that contains the headers.
+
+##### Returns
+
+- `node`: A `NodeType` object representing the table of contents hierarchy. It will be `undefined` initially and will be updated once the table of contents is generated.
+
+
+
+
+
 ## Options
 
 The `TableOfContents` class accepts an optional `options` object during initialization. The available options are:
@@ -101,50 +147,6 @@ After calling the `init` method with the default options, the generated table of
   </ul>
 </div>
 ```
-
-### React Hook
-
-#### Example
-
-```javascript
-import { useRef } from 'react';
-import useTableOfContents from 'table-of-contents-library/hook';
-
-const MyComponent = () => {
-  const contentRef = useRef();
-  const tocData = useTableOfContents({ contentRef });
-
-  return (
-    <div>
-      {/* Your content goes here */}
-      <div ref={contentRef}>...</div>
-
-      {/* Render the table of contents */}
-      {tocData && (
-        <ul>
-          {tocData.children.map((node) => (
-            <li key={node.id}>
-              <a href={`#${node.id}`}>{node.content}</a>
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
-  );
-};
-```
-
-#### `useTableOfContents` Hook
-
-##### Parameters
-
-- `contentRef`: A `MutableRefObject` containing a reference to the content element in the HTML document that contains the headers.
-
-##### Returns
-
-- `node`: A `NodeType` object representing the table of contents hierarchy. It will be `undefined` initially and will be updated once the table of contents is generated.
-
-
 
 
 
