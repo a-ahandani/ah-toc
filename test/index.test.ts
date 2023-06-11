@@ -1,4 +1,4 @@
-import TableOfContents from '../src';
+import { TableOfContents } from '../src/index';
 
 
 describe('TableOfContents', () => {

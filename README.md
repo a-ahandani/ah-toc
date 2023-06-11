@@ -1,16 +1,16 @@
 # Table of Contents Generator
 
-The Table of Contents Generator is a JavaScript library that generates a table of contents based on the headings (e.g., `<h1>`, `<h2>`, `<h3>`) within an HTML document. It provides options for customizing the generated table of contents.
+The Table of Contents Generator is a JavaScript (+ react hook) library that generates a table of contents based on the headings (e.g., `<h1>`, `<h2>`, `<h3>`) within an HTML document. It provides options for customizing the generated table of contents.
 
 - No external dependencies
-- Size: 1.33 kB (minified and gzipped)
+- Size: 4.04 kB (minified and gzipped)
 
 ## Installation
 
 You can install the Table of Contents Generator library using npm:
 
 ```bash
-npm install html-toc-generator
+npm install ah-toc
 ```
 
 ## Usage
@@ -20,7 +20,7 @@ To use the Table of Contents Generator in your project, follow these steps:
 1. Import the library:
 
 ```javascript
-import TableOfContents from 'html-toc-generator';
+import TableOfContents from 'ah-toc';
 ```
 
 2. Create an instance of the `TableOfContents` class:
@@ -54,7 +54,7 @@ The `TableOfContents` class accepts an optional `options` object during initiali
 | `containerClassName` | `string`   | `'toc'`              | Yes      | The CSS class name to be applied to the container element of the table of contents.                |
 | `ordered`            | `boolean`  | `false`              | Yes      | A boolean value indicating whether the generated table of contents should be ordered or unordered. |
 | `contentSelector`    | `string`   | `'#content'`         | Yes      | The selector of the element containing the content to generate the table of contents from.         |
-s
+
 
 ## Example
 
@@ -101,6 +101,52 @@ After calling the `init` method with the default options, the generated table of
   </ul>
 </div>
 ```
+
+### React Hook
+
+#### Example
+
+```javascript
+import { useRef } from 'react';
+import useTableOfContents from 'table-of-contents-library/hook';
+
+const MyComponent = () => {
+  const contentRef = useRef();
+  const tocData = useTableOfContents({ contentRef });
+
+  return (
+    <div>
+      {/* Your content goes here */}
+      <div ref={contentRef}>...</div>
+
+      {/* Render the table of contents */}
+      {tocData && (
+        <ul>
+          {tocData.children.map((node) => (
+            <li key={node.id}>
+              <a href={`#${node.id}`}>{node.content}</a>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+};
+```
+
+#### `useTableOfContents` Hook
+
+##### Parameters
+
+- `contentRef`: A `MutableRefObject` containing a reference to the content element in the HTML document that contains the headers.
+
+##### Returns
+
+- `node`: A `NodeType` object representing the table of contents hierarchy. It will be `undefined` initially and will be updated once the table of contents is generated.
+
+
+
+
 
 Please note that no CSS styles are added by default to keep the library simple and customizable. You can apply your own CSS styles by targeting the generated classes and elements.
 
