@@ -1,6 +1,6 @@
-# Table of Contents Generator
+# Table of Contents Generator (+ react hook)
 
-The Table of Contents Generator is a JavaScript (+ react hook) library that generates a table of contents based on the headings (e.g., `<h1>`, `<h2>`, `<h3>`) within an HTML document. It provides options for customizing the generated table of contents.
+The Table of Contents Generator is a JavaScript library that generates a table of contents based on the headings (e.g., `<h1>`, `<h2>`, `<h3>`) within an HTML document. It provides options for customizing the generated table of contents.
 
 - No external dependencies
 - Size: 4.04 kB (minified and gzipped)
