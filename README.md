@@ -19,6 +19,8 @@ To use the Table of Contents Generator in your project, follow these steps:
 
 ### 1- Pure Javascript
 
+
+
 1. Import the library:
 
 ```javascript
@@ -48,6 +50,9 @@ tableOfContents.init();
 ### 2- React Hook
 
 #### Example
+
+[Codesandbox]([URL](https://codesandbox.io/s/ah-toc-75y2mh?file=/index.html))
+
 
 ```javascript
 import { useRef } from 'react';
