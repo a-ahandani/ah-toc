@@ -18,12 +18,6 @@ npm install ah-toc
 #### Examples
 [Codesandbox Example ](https://codesandbox.io/s/ah-toc-75y2mh?file=/index.html)
 
-<iframe src="https://codesandbox.io/embed/ah-toc-75y2mh?fontsize=14&hidenavigation=1&theme=dark"
-     style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
-     title="ah-toc"
-     allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-     sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-   ></iframe>
 
 ## Usage
 
